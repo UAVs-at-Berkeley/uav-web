@@ -1,16 +1,16 @@
 {
   "tiers": [
     {
-      "tier": "Platinum",
-      "names": ["Alex Chen", "Jordan Patel"]
+      "tier": "Hexacopter Tier - $1,000+",
+      "names": ["David Hooper and The Hooper Family", "Engineering Student Council - UC Berkeley"]
     },
     {
-      "tier": "Gold",
-      "names": ["Sam Rivera", "Kai Thompson", "Taylor Kim"]
+      "tier": "Quad Copter Tier - $500+",
+      "names": ["The Bi Family", "Dayna Kully", "John and Colleen Lomax", "Frank Scherkenbach"]
     },
     {
-      "tier": "Silver",
-      "names": ["Morgan Lee", "Riley Cruz", "Casey Singh"]
+      "tier": "Tricopter Tier - Up to $500",
+      "names": ["Cameron and Nikki Black", "Wei Chen", "The Chun Family", "The Churchill Family", "Melissa Mullard", "The Palmer Family", "The Yan Family", "George Yu"]
     }
   ]
 }
