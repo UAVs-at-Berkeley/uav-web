@@ -1,0 +1,87 @@
+---
+import Layout from '../layouts/Layout.astro';
+import LeadershipGrid from '../components/sections/LeadershipGrid.astro';
+import { getEntry } from 'astro:content';
+
+const leadershipEntry = await getEntry('leadership', 'leadership');
+if (!leadershipEntry) {
+  throw new Error('Leadership data not found');
+}
+---
+
+<Layout title="Contact">
+  <section class="contact-info">
+    <h1>Contact Us</h1>
+    <p>Feel free to reach out to us with any questions!</p>
+    <ul>
+      <li><a href="mailto:officers@uav.studentorg.berkeley.edu">General Inquiries</a></li>
+      <li><a href="mailto:media@uav.studentorg.berkeley.edu">Videography</a></li>
+    </ul>
+  </section>
+
+  <section class="leadership-section">
+    <h2>Leadership</h2>
+    <LeadershipGrid members={leadershipEntry.data.members} />
+  </section>
+
+  <section class="map-section">
+    <h2>Visit Us</h2>
+    <p>McLaughlin 107A, UC Berkeley, Berkeley, CA 94720</p>
+    <iframe
+      title="UAVs at Berkeley map"
+      src="https://www.google.com/maps?q=McLaughlin+Hall+UC+Berkeley&output=embed"
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade"
+    ></iframe>
+  </section>
+</Layout>
+
+<style>
+  .contact-info {
+    margin-bottom: 2rem;
+  }
+
+  .contact-info p {
+    margin-top: 0;
+    color: #4b5563;
+  }
+
+  ul {
+    margin: 0;
+    padding-left: 1rem;
+    display: grid;
+    gap: 0.4rem;
+  }
+
+  .leadership-section {
+    display: grid;
+    gap: 0.75rem;
+    margin-bottom: 2rem;
+  }
+
+  .leadership-section h2,
+  .leadership-section p {
+    margin: 0;
+  }
+
+  .leadership-section p {
+    color: #4b5563;
+  }
+
+  .map-section {
+    display: grid;
+    gap: 0.75rem;
+  }
+
+  .map-section p {
+    margin: 0;
+    color: #4b5563;
+  }
+
+  iframe {
+    width: 100%;
+    min-height: 340px;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.75rem;
+  }
+</style>

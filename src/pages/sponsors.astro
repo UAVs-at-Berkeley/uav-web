@@ -1,0 +1,70 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Button from '../components/ui/Button.astro';
+import Card from '../components/ui/Card.astro';
+import SponsorLogoGallery from '../components/sections/SponsorLogoGallery.astro';
+import DonorWall from '../components/sections/DonorWall.astro';
+import { getEntry } from 'astro:content';
+
+const logosEntry = await getEntry('sponsorLogos', 'sponsor-logos');
+const donorsEntry = await getEntry('donors', 'donors');
+
+if (!logosEntry || !donorsEntry) {
+  throw new Error('Sponsor data not found');
+}
+---
+
+<Layout title="Sponsors">
+  <section class="hero">
+    <div>
+      <h1>We Fly On Your Support!</h1>
+      <p>Our projects are only possible because of the generosity of our sponsors. They help cover the cost of materials, equipment, competition travel, and more.</p>
+    </div>
+    <Card>
+      <h2>Sponsor Us</h2>
+      <p>Download our sponsor packet and reach out to discuss partnerships!</p>
+      <Button href={`https://drive.google.com/file/d/1BKjw3VCf-VX11dzsjpBwFraexcqgRTky/view?usp=sharing`}>Sponsor Packet</Button>
+      <p><a href={`mailto:officers@uav.studentorg.berkeley.edu`}>officers@uav.studentorg.berkeley.edu</a></p>
+    </Card>
+  </section>
+
+  <section>
+    <h2>Our Sponsors</h2>
+    <SponsorLogoGallery logos={logosEntry.data.logos} />
+  </section>
+
+  <DonorWall tiers={donorsEntry.data.tiers} />
+</Layout>
+
+<style>
+  .hero {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 1rem;
+    align-items: start;
+  }
+
+  .hero p {
+    margin: 0;
+    color: #4b5563;
+  }
+
+  .hero h2 {
+    margin-top: 0;
+  }
+
+  .hero :global([data-slot='card']) {
+    display: grid;
+    gap: 0.75rem;
+  }
+
+  section {
+    margin-bottom: 2rem;
+  }
+
+  @media (max-width: 900px) {
+    .hero {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

@@ -1,0 +1,13 @@
+---
+import { Card as ShadCard } from './card';
+
+interface Props {
+  class?: string;
+}
+
+const { class: className = '' } = Astro.props;
+---
+
+<ShadCard className={className}>
+  <slot />
+</ShadCard>

@@ -1,0 +1,75 @@
+---
+interface Props {
+  href: string;
+  title: string;
+  dateLabel: string;
+  image: string;
+  imageAlt: string;
+  description: string;
+  tag: string;
+}
+
+const { href, title, dateLabel, image, imageAlt, description, tag } = Astro.props;
+---
+
+<a class="project-card" href={href}>
+  <img src={image} alt={imageAlt} loading="lazy" />
+  <div class="content">
+    <p class="meta">{tag} · {dateLabel}</p>
+    <h3>{title}</h3>
+    <p>{description}</p>
+  </div>
+</a>
+
+<style>
+  .project-card {
+    border: 1px solid #e5e7eb;
+    border-radius: 0.75rem;
+    display: grid;
+    grid-template-columns: 160px 1fr;
+    text-decoration: none;
+    color: inherit;
+    overflow: hidden;
+    background: #ffffff;
+  }
+
+  .project-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    min-height: 130px;
+    border-right: 1px solid #e5e7eb;
+  }
+
+  .content {
+    padding: 1rem;
+  }
+
+  .meta {
+    margin: 0;
+    color: #6b7280;
+    font-size: 0.95rem;
+  }
+
+  h3 {
+    margin: 0.4rem 0 0.5rem;
+    font-size: 1.15rem;
+  }
+
+  p {
+    margin: 0;
+    color: #374151;
+  }
+
+  @media (max-width: 720px) {
+    .project-card {
+      grid-template-columns: 1fr;
+    }
+
+    .project-card img {
+      border-right: 0;
+      border-bottom: 1px solid #e5e7eb;
+      max-height: 200px;
+    }
+  }
+</style>

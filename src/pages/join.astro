@@ -1,0 +1,95 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Button from '../components/ui/Button.astro';
+import Card from '../components/ui/Card.astro';
+import Accordion from '../components/ui/Accordion.astro';
+import HorizontalGallery from '../components/sections/HorizontalGallery.astro';
+import UpcomingEvents from '../components/sections/UpcomingEvents.astro';
+import { getPublicGalleryImages } from '../utils/gallery';
+
+const joinAccordionItems = [
+  {
+    title: 'Fall Semesters',
+    content:
+      '<p>All new members can participate in our four week Ground School onboarding program. Look out for info sessions about our fall onboarding process. Join our Discord and follow our Instagram for announcements.</p>',
+  },
+  {
+    title: 'During School Year',
+    content:
+      "<p>When our Ground School program isn't running, please join our Discord to start getting involved!</p>",
+  },
+];
+
+const joinGallery = await getPublicGalleryImages('join', 'Join gallery image');
+---
+
+<Layout title="Join">
+  <section class="intro section-space">
+    <h1>Join UAVs@Berkeley!</h1>
+    <p>We'd love to have you! As a Blue and Gold Certified club, we welcome all students regardless of engineering background. You can learn everything you need by proactively participating.</p>
+    <p>Our team consists of four subteams: airframe, electrical, software, and business/media.</p>
+    <p>We encourage cross-disciplinary collaboration and members a free to participate in multiple subteams. Many do!</p>
+  </section>
+
+  <section class="section-space">
+    <Card class="discord-card">
+      <h2>Join Our Discord</h2>
+      <p>Discord is our primary means of communication. Announcements, technical discussions, and everything else all happens here.</p>
+      <Button href="https://discord.gg/UfFhAbaJnU" class="cta">Discord Invite</Button>
+    </Card>
+  </section>
+
+  <section class="section-space">
+    <h2>Recruiting Timelines</h2>
+    <Accordion items={joinAccordionItems} />
+  </section>
+
+  <section class="section-space">
+    <h2>Ground School Program</h2>
+    <p>
+      Ground School is our onboarding program. It contains three tracks-mechanical, electrical, and software-and will teach everything you need to get started with drones. Each track has one short lecture and one mini-project per week. Examples include:
+    </p>
+    <ul>
+      <li><p>CAD and FEA</p></li>
+      <li><p>PCB design</p></li>
+      <li><p>Computer vision implementations</p></li>
+      <li><p>Hand launched glider project</p></li>
+    </ul>
+    <p>Members only interested in the business/media subteam are not required to participate in Ground School.</p>
+    <p>Already have experience? Come talk to one of the subteam leads and we'll get you started early!</p>
+  </section>
+
+  <section class="section-space">
+    <HorizontalGallery images={joinGallery} />
+  </section>
+
+  <section class="section-space">
+    <UpcomingEvents title="Upcoming Events" />
+  </section>
+</Layout>
+
+<style>
+  .section-space {
+    margin-bottom: 2rem;
+  }
+
+  .intro p,
+  section p {
+    margin: 0;
+    color: #4b5563;
+  }
+
+  .cta {
+    margin-top: 0.8rem;
+  }
+
+  .discord-card {
+    display: grid;
+    gap: 0.7rem;
+  }
+
+  .discord-card h2,
+  .discord-card p {
+    margin: 0;
+  }
+</style>

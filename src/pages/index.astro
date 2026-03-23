@@ -1,11 +1,201 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
+import Button from '../components/ui/Button.astro';
+import Accordion from '../components/ui/Accordion.astro';
+import HorizontalGallery from '../components/sections/HorizontalGallery.astro';
+import UpcomingEvents from '../components/sections/UpcomingEvents.astro';
+import { ChevronDown } from 'lucide-react';
+import { getPublicGalleryImages } from '../utils/gallery';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const aboutItems = [
+	{
+		title: 'Competition',
+		content: 'We build autonomous search and rescue vehicles for the RoboNation Student Unmanned Aerial Systems and California Unmanned Aerial Systems competitions.',
+	},
+	{
+		title: 'Research',
+		content: "Some of our past research topics include GPS-denied navigation, aerial battery swapping, and arm-gesture drone swarm control. We're always looking for new research projects to work on!",
+	},
+	{
+		title: 'Videography',
+		content: "We make cool content both for ourselves and for other campus organizations, like Cal Triathalon. If you're interested in aerial photo or videography, this is the place to be!",
+	},
+	{
+		title: 'Outreach',
+		content: "We frequently table at events like Open Sauce and Maker Faire and run workshops for middle school students to bring UAVs to more people.",
+	},
+];
+
+const homeGallery = await getPublicGalleryImages('home', 'Home gallery image');
 ---
 
-<Layout>
-	<Welcome />
+<Layout title="Home">
+	<section class="hero section-space hero-full-bleed">
+		<div class="hero-overlay">
+			<h1>Fly With Us.</h1>
+			<p>Building the future of autonomous aviation, one drone at a time</p>
+			<Button href="/join">Get Involved</Button>
+		</div>
+		<a id="hero-scroll-link" href="#about" class="hero-scroll-indicator" aria-label="Scroll to About section">
+			<ChevronDown className="hero-scroll-icon" aria-hidden="true" />
+		</a>
+	</section>
+
+	<section id="about" class="about section-space">
+		<div>
+			<h2>What we do</h2>
+			<p>
+				We are the premier campus organization for all things drones. Our members come from all majors and we welcome those with no engineering background. We have a spiffy lab in McLaughlin 107A (the only engineering club with space on campus!) where we build our vehicles.
+			</p>
+		</div>
+		<Accordion items={aboutItems} />
+	</section>
+
+	<section class="section-space">
+		<HorizontalGallery images={homeGallery} />
+	</section>
+
+	<section class="section-space">
+		<UpcomingEvents title="Upcoming Events" />
+	</section>
 </Layout>
+
+<script>
+	const scrollToAbout = () => {
+		const section = document.getElementById('about');
+		if (!section) {
+			return;
+		}
+
+		const navbar = document.getElementById('site-navbar') ?? document.querySelector('header');
+		const navbarHeight = navbar instanceof HTMLElement ? navbar.getBoundingClientRect().height : 0;
+		const targetY = section.getBoundingClientRect().top + window.scrollY - navbarHeight;
+
+		window.scrollTo({ top: targetY, behavior: 'smooth' });
+	};
+
+	const button = document.getElementById('learn-more-button');
+	button?.addEventListener('click', () => {
+		scrollToAbout();
+	});
+
+	const heroScrollLink = document.getElementById('hero-scroll-link');
+	heroScrollLink?.addEventListener('click', (event) => {
+		event.preventDefault();
+		scrollToAbout();
+	});
+</script>
+
+<style>
+	.section-space {
+		margin-bottom: 2rem;
+	}
+
+	.hero {
+		position: relative;
+		border-radius: 0;
+		overflow: hidden;
+		min-height: 100svh;
+		display: flex;
+		align-items: center;
+		justify-content: flex-start;
+		background-image:
+			url('/images/banner4.png');
+		background-size: cover;
+		background-position: center;
+	}
+
+	.hero-full-bleed {
+		width: 100vw;
+		margin-left: calc(50% - 50vw);
+		margin-right: calc(50% - 50vw);
+	}
+
+	.hero-scroll-indicator {
+		position: absolute;
+		left: 50%;
+		bottom: 1.25rem;
+		transform: translateX(-50%);
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: 2.5rem;
+		height: 2.5rem;
+		border-radius: 9999px;
+		color: #ffffff;
+		text-decoration: none;
+		background: rgba(255, 255, 255, 0.16);
+		backdrop-filter: blur(4px);
+	}
+
+	.hero-scroll-indicator:hover,
+	.hero-scroll-indicator:focus-visible {
+		background: rgba(255, 255, 255, 0.24);
+	}
+
+	.hero-scroll-icon {
+		width: 1.2rem;
+		height: 1.2rem;
+	}
+
+	.hero-overlay {
+		display: grid;
+		gap: 0.75rem;
+		padding: 2rem;
+		max-width: min(44rem, 52%);
+		justify-items: start;
+		text-align: left;
+	}
+
+	.hero h1,
+	.hero p {
+		color: #ffffff;
+		text-shadow: 0 1px 2px rgba(15, 23, 42, 0.35);
+	}
+
+	.hero h1,
+	.hero p,
+	.involved p {
+		margin: 0;
+	}
+
+	.about p,
+	.involved p {
+		color: #4b5563;
+	}
+
+	.about {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 1rem;
+		align-items: start;
+	}
+
+	.about p {
+		margin: 0;
+	}
+
+	.involved {
+		display: grid;
+		gap: 0.75rem;
+	}
+
+	@media (max-width: 900px) {
+		.hero {
+			align-items: flex-end;
+			justify-content: flex-start;
+		}
+
+		.hero-overlay {
+			padding: 1.125rem;
+			max-width: 100%;
+			width: 100%;
+			justify-items: start;
+			text-align: left;
+		}
+
+		.about {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>

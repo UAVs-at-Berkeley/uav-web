@@ -1,0 +1,90 @@
+---
+interface ImageItem {
+  src: string;
+  alt: string;
+}
+
+interface Props {
+  title?: string;
+  images: ImageItem[];
+}
+
+const { title, images } = Astro.props;
+const loopedImages = [...images, ...images];
+---
+
+<section class="uav-marquee-section gallery-section">
+  {title && <h2>{title}</h2>}
+  <div class="uav-marquee-viewport gallery-viewport">
+    <div class="uav-marquee-track gallery-track" style={{ '--gallery-count': String(images.length) }}>
+    {
+      loopedImages.map((image, index) => (
+        <figure class="uav-marquee-item gallery-item">
+          <img src={image.src} alt={index < images.length ? image.alt : ''} loading="lazy" aria-hidden={index >= images.length} />
+        </figure>
+      ))
+    }
+    </div>
+  </div>
+</section>
+
+<style is:global>
+  .gallery-section {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .uav-marquee-viewport {
+    overflow: hidden;
+    width: 100%;
+    border-radius: 0.75rem;
+  }
+
+  .uav-marquee-track {
+    display: flex;
+    gap: var(--gallery-gap, 1rem);
+    width: max-content;
+    will-change: transform;
+    animation: uav-gallery-marquee var(--gallery-duration, 60s) linear infinite;
+  }
+
+  .uav-marquee-item {
+    margin: 0;
+    flex: 0 0 auto;
+    height: clamp(180px, 24vw, 280px);
+    width: auto;
+  }
+
+  .uav-marquee-item img {
+    display: block;
+    height: 100%;
+    width: auto;
+    max-width: none;
+    object-fit: contain;
+    border-radius: 0.75rem;
+    border: 1px solid #e5e7eb;
+  }
+
+  @keyframes uav-gallery-marquee {
+    from {
+      transform: translate3d(0, 0, 0);
+    }
+
+    to {
+      transform: translate3d(calc(-50% - (var(--gallery-gap, 1rem) / 2)), 0, 0);
+    }
+  }
+
+  @media (max-width: 900px) {
+    .uav-marquee-track {
+      --gallery-duration: 32s;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .uav-marquee-track {
+      animation: none;
+      transform: none;
+    }
+  }
+</style>

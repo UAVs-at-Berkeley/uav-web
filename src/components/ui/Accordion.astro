@@ -1,0 +1,87 @@
+---
+interface Item {
+  title: string;
+  content: string;
+}
+
+interface Props {
+  items: Item[];
+  class?: string;
+}
+
+const { items, class: className = '' } = Astro.props;
+---
+
+<div class:list={["accordion", className]}>
+  {items.map((item) => (
+    <details class="accordion-item" name="site-accordion">
+      <summary class="accordion-trigger">
+        <span>{item.title}</span>
+        <span class="accordion-icon" aria-hidden="true">+</span>
+      </summary>
+      <div class="accordion-content" set:html={item.content}></div>
+    </details>
+  ))}
+</div>
+
+<style>
+  .accordion {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .accordion-item {
+    border-bottom: 1px solid var(--border);
+  }
+
+  .accordion-trigger {
+    align-items: flex-start;
+    cursor: pointer;
+    display: flex;
+    font-size: 0.875rem;
+    font-weight: 500;
+    justify-content: space-between;
+    list-style: none;
+    padding: 0.625rem 0;
+    user-select: none;
+    width: 100%;
+  }
+
+  .accordion-trigger::-webkit-details-marker {
+    display: none;
+  }
+
+  .accordion-icon {
+    color: var(--muted-foreground);
+    font-size: 1.125rem;
+    line-height: 1;
+    margin-left: 0.75rem;
+    transition: transform 160ms ease;
+  }
+
+  .accordion-item[open] .accordion-icon {
+    transform: rotate(45deg);
+  }
+
+  .accordion-content {
+    padding: 0 0 0.75rem;
+    color: var(--muted-foreground);
+    font-size: 0.875rem;
+  }
+
+  .accordion-content p {
+    margin: 0;
+  }
+
+  .accordion-content a {
+    color: var(--primary);
+    text-decoration: none;
+    transition: opacity 0.2s ease;
+  }
+
+  .accordion-content a:hover {
+    opacity: 0.8;
+    text-decoration: underline;
+  }
+</style>

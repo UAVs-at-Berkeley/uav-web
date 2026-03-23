@@ -1,0 +1,11 @@
+---
+import NavbarClient from './NavbarClient';
+
+interface Props {
+  currentPath: string;
+}
+
+const { currentPath } = Astro.props;
+---
+
+<NavbarClient currentPath={currentPath} client:load />

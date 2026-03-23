@@ -1,0 +1,24 @@
+---
+import { buttonVariants } from './button';
+import { cn } from '@/lib/utils';
+
+interface Props {
+  href?: string;
+  type?: 'button' | 'submit' | 'reset';
+  class?: string;
+  id?: string;
+}
+
+const { href, type = 'button', class: className = '', id } = Astro.props;
+const classes = cn(buttonVariants({ variant: 'outline' }), className);
+---
+
+{href ? (
+  <a href={href} class={classes} id={id}>
+    <slot />
+  </a>
+) : (
+  <button type={type} class={classes} id={id}>
+    <slot />
+  </button>
+)}

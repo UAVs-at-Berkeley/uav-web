@@ -1,0 +1,39 @@
+{
+  "members": [
+    {
+      "name": "John Lomax",
+      "title": "President",
+      "image": "/images/leadership/avery.svg"
+    },
+    {
+      "name": "Kaleb Lee",
+      "title": "Treasurer",
+      "image": "/images/leadership/avery.svg"
+    },
+    {
+      "name": "Eric Gu",
+      "title": "Co-Lead Airframe Engineer",
+      "image": "/images/leadership/noah.svg"
+    },
+    {
+      "name": "Gustavo Hochman",
+      "title": "Co-Lead Airframe Engineer",
+      "image": "/images/leadership/mia.svg"
+    },
+    {
+      "name": "Ryan Yue",
+      "title": "Lead Electrical Engineer",
+      "image": "/images/leadership/liam.svg"
+    },
+    {
+      "name": "Isaac Jones",
+      "title": "Lead Software Engineer",
+      "image": "/images/leadership/liam.svg"
+    },
+    {
+      "name": "Troy Kim",
+      "title": "Business/Media Lead",
+      "image": "/images/leadership/liam.svg"
+    }
+  ]
+}

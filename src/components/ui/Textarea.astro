@@ -1,0 +1,30 @@
+---
+import { Textarea as ShadTextarea } from './textarea';
+
+interface Props {
+  id?: string;
+  name?: string;
+  placeholder?: string;
+  required?: boolean;
+  rows?: number;
+  class?: string;
+}
+
+const {
+  id,
+  name,
+  placeholder,
+  required = false,
+  rows = 5,
+  class: className = '',
+} = Astro.props;
+---
+
+<ShadTextarea
+  id={id}
+  name={name}
+  placeholder={placeholder}
+  required={required}
+  rows={rows}
+  className={className}
+/>

@@ -1,0 +1,16 @@
+{
+  "tiers": [
+    {
+      "tier": "Platinum",
+      "names": ["Alex Chen", "Jordan Patel"]
+    },
+    {
+      "tier": "Gold",
+      "names": ["Sam Rivera", "Kai Thompson", "Taylor Kim"]
+    },
+    {
+      "tier": "Silver",
+      "names": ["Morgan Lee", "Riley Cruz", "Casey Singh"]
+    }
+  ]
+}

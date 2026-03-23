@@ -1,0 +1,175 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Input from '../../components/ui/Input.astro';
+import ProjectCard from '../../components/sections/ProjectCard.astro';
+import { getCollection } from 'astro:content';
+
+const projects = await getCollection('projects');
+
+const tags = ['All', 'Competition', 'Research', 'Videography', 'Fun'] as const;
+
+const getDateSortValue = (date: string) => {
+  const normalized = date.trim();
+  if (/^ongoing$/i.test(normalized)) return Number.POSITIVE_INFINITY;
+
+  const match = /^(Spring|Fall)\s+(\d{4})$/i.exec(normalized);
+  if (!match) return Number.NEGATIVE_INFINITY;
+
+  const [, term, yearText] = match;
+  const year = Number.parseInt(yearText, 10);
+  const termWeight = term.toLowerCase() === 'fall' ? 2 : 1;
+  return year * 10 + termWeight;
+};
+
+const sortedProjects = [...projects].sort((a, b) => {
+  const aDate = getDateSortValue(a.data.date);
+  const bDate = getDateSortValue(b.data.date);
+  return bDate - aDate;
+});
+---
+
+<Layout title="Projects">
+  <section class="page-intro">
+    <h1>Projects</h1>
+  </section>
+
+  <section class="projects-layout" data-projects-root>
+    <aside>
+      <h2>Categories</h2>
+      <div class="tag-list" data-tag-list>
+        {
+          tags.map((tag, index) => (
+            <button class:list={{ active: index === 0 }} data-filter-tag={tag} type="button">
+              {tag}
+            </button>
+          ))
+        }
+      </div>
+      <label for="project-search">Search</label>
+      <Input id="project-search" placeholder="Search projects" />
+    </aside>
+
+    <div class="cards" data-project-cards>
+      {
+        sortedProjects.map((project) => (
+          <div data-project-tag={project.data.tag} data-project-title={project.data.title.toLowerCase()}>
+            <ProjectCard
+              href={`/projects/${project.id}`}
+              title={project.data.title}
+              dateLabel={project.data.date}
+              image={project.data.image}
+              imageAlt={project.data.imageAlt}
+              description={project.data.description}
+              tag={project.data.tag}
+            />
+          </div>
+        ))
+      }
+    </div>
+  </section>
+</Layout>
+
+<script>
+  const root = document.querySelector<HTMLElement>('[data-projects-root]');
+  if (!root) {
+    // no-op
+  } else {
+    const searchInput = root.querySelector<HTMLInputElement>('#project-search');
+    const tagButtons = [...root.querySelectorAll<HTMLButtonElement>('[data-filter-tag]')];
+    const cards = [...root.querySelectorAll<HTMLElement>('[data-project-tag]')];
+    let currentTag = 'All';
+
+    const applyFilters = () => {
+      const query = (searchInput?.value ?? '').toLowerCase().trim();
+
+      cards.forEach((card) => {
+        const tag = card.dataset.projectTag;
+        const title = card.dataset.projectTitle ?? '';
+        const matchesTag = currentTag === 'All' || tag === currentTag;
+        const matchesSearch = !query || title.includes(query);
+        card.style.display = matchesTag && matchesSearch ? 'block' : 'none';
+      });
+    };
+
+    searchInput?.addEventListener('input', applyFilters);
+
+    tagButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        currentTag = button.dataset.filterTag ?? 'All';
+        tagButtons.forEach((btn) => btn.classList.remove('active'));
+        button.classList.add('active');
+        applyFilters();
+      });
+    });
+  }
+</script>
+
+<style>
+  .page-intro {
+    display: grid;
+    gap: 0.75rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .page-intro p {
+    margin: 0;
+    color: #4b5563;
+  }
+
+  .projects-layout {
+    display: grid;
+    grid-template-columns: 270px 1fr;
+    gap: 1rem;
+    align-items: start;
+  }
+
+  aside {
+    border: 1px solid #e5e7eb;
+    border-radius: 0.75rem;
+    padding: 1rem;
+    background: #ffffff;
+    display: grid;
+    gap: 0.85rem;
+    position: sticky;
+    top: 5rem;
+  }
+
+  aside h2 {
+    margin: 0;
+    font-size: 1rem;
+  }
+
+  .tag-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+  }
+
+  .tag-list button {
+    border: 1px solid #d1d5db;
+    background: #ffffff;
+    border-radius: 999px;
+    padding: 0.4rem 0.7rem;
+    cursor: pointer;
+  }
+
+  .tag-list button.active {
+    background: #f3f4f6;
+    border-color: #9ca3af;
+  }
+
+  .cards {
+    display: grid;
+    gap: 0.9rem;
+  }
+
+  @media (max-width: 900px) {
+    .projects-layout {
+      grid-template-columns: 1fr;
+    }
+
+    aside {
+      position: static;
+    }
+  }
+</style>

@@ -1,0 +1,59 @@
+---
+interface Tier {
+  tier: string;
+  names: string[];
+}
+
+interface Props {
+  tiers: Tier[];
+}
+
+const { tiers } = Astro.props;
+---
+
+<section class="donor-wall">
+  <h2>Donor Wall</h2>
+  <div class="tiers">
+    {
+      tiers.map((tier) => (
+        <article>
+          <h3>{tier.tier}</h3>
+          <ul>
+            {tier.names.map((name) => <li>{name}</li>)}
+          </ul>
+        </article>
+      ))
+    }
+  </div>
+</section>
+
+<style>
+  .donor-wall {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .tiers {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+  }
+
+  article {
+    border: 1px solid #e5e7eb;
+    border-radius: 0.75rem;
+    padding: 1rem;
+    background: #ffffff;
+  }
+
+  h3 {
+    margin: 0 0 0.6rem;
+  }
+
+  ul {
+    margin: 0;
+    padding-left: 1rem;
+    display: grid;
+    gap: 0.35rem;
+  }
+</style>

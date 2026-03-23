@@ -1,0 +1,182 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const projects = await getCollection('projects');
+  return projects.map((project) => ({
+    params: { slug: project.id },
+    props: { project },
+  }));
+}
+
+const { project } = Astro.props;
+const { Content } = await render(project);
+const dateLabel = project.data.date;
+---
+
+<Layout title={project.data.title}>
+  <article class="project-page">
+    <header>
+      <p>{project.data.tag} · {dateLabel}</p>
+      <h1>{project.data.title}</h1>
+      <img src={project.data.image} alt={project.data.imageAlt} />
+    </header>
+
+    <section class="content">
+      <Content />
+    </section>
+  </article>
+</Layout>
+
+<style>
+  .project-page {
+    display: grid;
+    gap: 1rem;
+  }
+
+  header p {
+    margin: 0;
+    color: #6b7280;
+  }
+
+  h1 {
+    margin: 0.45rem 0 1rem;
+  }
+
+  img {
+    width: 100%;
+    max-width: 900px;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.75rem;
+  }
+
+  .content {
+    border: 1px solid #e5e7eb;
+    border-radius: 0.75rem;
+    padding: 1rem;
+    background: #ffffff;
+  }
+
+  .content :global(h1),
+  .content :global(h2),
+  .content :global(h3),
+  .content :global(h4),
+  .content :global(h5),
+  .content :global(h6) {
+    line-height: 1.25;
+    margin: 1.25rem 0 0.65rem;
+  }
+
+  .content :global(h1) {
+    font-size: 1.65rem;
+  }
+
+  .content :global(h2) {
+    font-size: 1.35rem;
+  }
+
+  .content :global(h3) {
+    font-size: 1.15rem;
+  }
+
+  .content :global(p) {
+    line-height: 1.7;
+    margin: 0.75rem 0;
+    color: #374151;
+  }
+
+  .content :global(a) {
+    color: #1d4ed8;
+    text-decoration: none;
+  }
+
+  .content :global(a:hover),
+  .content :global(a:focus-visible) {
+    text-decoration: underline;
+  }
+
+  .content :global(ul),
+  .content :global(ol) {
+    margin: 0.75rem 0;
+    padding-left: 1.25rem;
+  }
+
+  .content :global(li) {
+    margin: 0.35rem 0;
+    line-height: 1.6;
+  }
+
+  .content :global(blockquote) {
+    margin: 1rem 0;
+    padding: 0.5rem 0.9rem;
+    border-left: 3px solid #d1d5db;
+    background: #f9fafb;
+    color: #4b5563;
+  }
+
+  .content :global(code) {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    font-size: 0.9em;
+    background: #f3f4f6;
+    border-radius: 0.35rem;
+    padding: 0.1rem 0.3rem;
+  }
+
+  .content :global(pre) {
+    margin: 1rem 0;
+    padding: 0.85rem;
+    border-radius: 0.65rem;
+    border: 1px solid #e5e7eb;
+    background: #111827;
+    overflow-x: auto;
+  }
+
+  .content :global(pre code) {
+    background: transparent;
+    color: #f9fafb;
+    padding: 0;
+  }
+
+  .content :global(table) {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+    border: 1px solid #e5e7eb;
+  }
+
+  .content :global(th),
+  .content :global(td) {
+    border: 1px solid #e5e7eb;
+    padding: 0.5rem 0.6rem;
+    text-align: left;
+  }
+
+  .content :global(th) {
+    background: #f9fafb;
+  }
+
+  .content :global(hr) {
+    border: 0;
+    border-top: 1px solid #e5e7eb;
+    margin: 1.2rem 0;
+  }
+
+  .content :global(img),
+  .content :global(video),
+  .content :global(iframe) {
+    display: block;
+    width: 100%;
+    max-width: 900px;
+    margin: 1rem 0;
+    border-radius: 0.65rem;
+    border: 1px solid #e5e7eb;
+    background: #000;
+  }
+
+  .content :global(video),
+  .content :global(iframe) {
+    aspect-ratio: 16 / 9;
+    height: auto;
+  }
+</style>

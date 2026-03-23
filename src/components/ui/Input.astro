@@ -1,0 +1,33 @@
+---
+import { Input as ShadInput } from './input';
+
+interface Props {
+  id?: string;
+  name?: string;
+  type?: string;
+  placeholder?: string;
+  required?: boolean;
+  value?: string;
+  class?: string;
+}
+
+const {
+  id,
+  name,
+  type = 'text',
+  placeholder,
+  required = false,
+  value,
+  class: className = '',
+} = Astro.props;
+---
+
+<ShadInput
+  id={id}
+  name={name}
+  type={type}
+  placeholder={placeholder}
+  required={required}
+  value={value}
+  className={className}
+/>

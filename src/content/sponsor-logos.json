@@ -1,0 +1,89 @@
+{
+  "logos": [
+    {
+      "name": "Hargrave Technologies",
+      "image": "/images/sponsors/hargrave-black.svg",
+      "link": "https://hargravetechnologies.com/"
+    },
+    {
+      "name": "Prusa Research",
+      "image": "/images/sponsors/prusa-black.png",
+      "link": "https://www.prusa3d.com/"
+    },
+    {
+      "name": "LDO Motors",
+      "image": "/images/sponsors/ldo.png",
+      "link": "https://ldomotors.com/"
+    },
+    {
+      "name": "Team BlackSheep",
+      "image": "/images/sponsors/tbs.jpg",
+      "link": "https://www.team-blacksheep.com/"
+    },
+    {
+      "name": "Hitec RCD",
+      "image": "/images/sponsors/hitec.png",
+      "link": "https://hitecrcd.com/"
+    },
+    {
+      "name": "ARK Electronics",
+      "image": "/images/sponsors/ark.png",
+      "link": "https://arkelectron.com/"
+    },
+    {
+      "name": "Boeing",
+      "image": "/images/sponsors/boeing.png",
+      "link": "https://www.boeing.com/"
+    },
+    {
+      "name": "Skydio",
+      "image": "/images/sponsors/skydio-black.svg",
+      "link": "https://www.skydio.com/"
+    },
+    {
+      "name": "Aero Systems West",
+      "image": "/images/sponsors/asw.jpg",
+      "link": "https://aerosystemswest.com/"
+    },
+    {
+      "name": "Tattu Batteries",
+      "image": "/images/sponsors/tattu.png",
+      "link": "https://genstattu.com/"
+    },
+    {
+      "name": "RFDesign",
+      "image": "/images/sponsors/rfdesign.jpeg",
+      "link": "https://rfdesign.com.au/"
+    },
+    {
+      "name": "DJI",
+      "image": "/images/sponsors/dji.jpg",
+      "link": "https://dji.com/"
+    },
+    {
+      "name": "CubePilot",
+      "image": "/images/sponsors/cube.jpeg",
+      "link": "https://www.cubepilot.org/"
+    },
+    {
+      "name": "Emax",
+      "image": "/images/sponsors/emax.png",
+      "link": "https://emax-usa.com/"
+    },
+    {
+      "name": "B&H Photo Video",
+      "image": "/images/sponsors/bh.svg",
+      "link": "https://www.bhphotovideo.com/"
+    },
+    {
+      "name": "Institute of Transportation Studies",
+      "image": "/images/sponsors/its.png",
+      "link": "https://its.berkeley.edu/"
+    },
+    {
+      "name": "Engineering Student Council",
+      "image": "/images/sponsors/esc.png",
+      "link": "https://esc.berkeley.edu/"
+    }
+  ]
+}
