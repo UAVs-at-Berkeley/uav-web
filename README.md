@@ -16,7 +16,7 @@ Source code for Astro-based replacement of WordPress site.
 |       ├── sponsors    # sponsor logos
 │       └── banner4.png # homepage banner
 ├── src
-│   ├── content
+│   └── content
 │       ├── projects    # project page markdown files
 │       ├── donors.json # donor wall for crowdfunding
 |       ├── leadership.json     # lead profiles
