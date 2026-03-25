@@ -1,34 +1,33 @@
-# Astro Starter Kit: Basics
+# UAVs@Berkeley Website
 
-```sh
-npm create astro@latest -- --template basics
-```
+Source code for Astro-based replacement of WordPress site.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
-
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
+## Site Structure
 
 ```text
 /
 ├── public/
-│   └── favicon.svg
+│   └── images
+│       ├── gallery
+|       |   ├── home    # homepage carousel photos
+|       |   └── join    # join page carousel photos
+|       ├── leadership  # leads headshots
+|       ├── projects    # project page photos
+|       ├── sponsors    # sponsor logos
+│       └── banner4.png # homepage banner
 ├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
-└── package.json
+│   ├── content
+│       ├── projects    # project page markdown files
+│       ├── donors.json # donor wall for crowdfunding
+|       ├── leadership.json     # lead profiles
+│       └── sponsor-logos.json  # sponsor links
+├── components.json     # schema definitions
+└── .env                # API keys for calendar updates
 ```
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+[Astro project structure documentation](https://docs.astro.build/en/basics/project-structure/).
 
-## 🧞 Commands
+## Commands
 
 All commands are run from the root of the project, from a terminal:
 
@@ -40,7 +39,3 @@ All commands are run from the root of the project, from a terminal:
 | `npm run preview`         | Preview your build locally, before deploying     |
 | `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
 | `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
