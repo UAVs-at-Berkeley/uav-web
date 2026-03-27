@@ -15,6 +15,7 @@ const mainLinks = [
   { href: "/", label: "Home" },
   { href: "/projects", label: "Projects" },
   { href: "/sponsors", label: "Sponsors" },
+  { href: "/docs", label: "Docs" },
 ]
 
 const joinLink = { href: "/join", label: "Join" }
