@@ -26,18 +26,26 @@ function normalizeUrl(url: string): string {
   return url.endsWith('/') ? url.slice(0, -1) : url
 }
 
-function isActive(pathname: string, href: string): boolean {
+function isActive(pathname: string, href: string, homeHref: string): boolean {
   const normPath = normalizeUrl(pathname)
   const normHref = normalizeUrl(href)
+  const normHome = normalizeUrl(homeHref)
+
+  // override home link to only be active on exact match
+  if (normHref === normHome) {
+    return normPath === normHome
+  }
+
   return normPath === normHref || normPath.startsWith(`${normHref}/`)
 }
 
 export default function NavbarClient({ currentPath, baseUrl }: NavbarClientProps) {
   const mainLinks = createNavLinks(baseUrl)
+  const homeLink = mainLinks[0]
   const joinLink = createJoinLink(baseUrl)
   const aboutLink = createAboutLink(baseUrl)
-  const aboutActive = isActive(currentPath, aboutLink.href)
-  const joinActive = isActive(currentPath, joinLink.href)
+  const aboutActive = isActive(currentPath, aboutLink.href, homeLink.href)
+  const joinActive = isActive(currentPath, joinLink.href, homeLink.href)
   const isHomePage = normalizeUrl(currentPath) === normalizeUrl(baseUrl)
   const [isScrolled, setIsScrolled] = useState(!isHomePage)
 
@@ -95,7 +103,7 @@ export default function NavbarClient({ currentPath, baseUrl }: NavbarClientProps
         <NavigationMenu align="end">
           <NavigationMenuList className="gap-1">
             {mainLinks.map((link) => {
-              const active = isActive(currentPath, link.href)
+              const active = isActive(currentPath, link.href, homeLink.href)
 
               return (
                 <NavigationMenuItem key={link.href}>
