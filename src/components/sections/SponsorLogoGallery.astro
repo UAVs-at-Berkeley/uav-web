@@ -16,7 +16,7 @@ const { logos } = Astro.props;
   {
     logos.map((logo) => (
       <a href={logo.link} target="_blank" rel="noreferrer" aria-label={logo.name}>
-        <img src={logo.image} alt={logo.name} loading="lazy" />
+        <img src={`${import.meta.env.BASE_URL}${logo.image.startsWith('/') ? logo.image.slice(1) : logo.image}`} alt={logo.name} loading="lazy" />
       </a>
     ))
   }

@@ -20,7 +20,7 @@ const dateLabel = project.data.date;
     <header>
       <p>{project.data.tag} · {dateLabel}</p>
       <h1>{project.data.title}</h1>
-      <img src={project.data.image} alt={project.data.imageAlt} />
+      <img src={`${import.meta.env.BASE_URL}${project.data.image.startsWith('/') ? project.data.image.slice(1) : project.data.image}`} alt={project.data.imageAlt} />
     </header>
 
     <section class="content">

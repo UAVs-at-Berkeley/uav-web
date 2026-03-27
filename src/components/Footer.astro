@@ -1,12 +1,14 @@
 ---
 import { MessageCircle, Instagram, Linkedin, Youtube } from "lucide-react";
 
+const baseUrl = import.meta.env.BASE_URL;
+
 const sitemapLinks = [
-  { href: "/", label: "Home" },
-  { href: "/projects", label: "Projects" },
-  { href: "/sponsors", label: "Sponsors" },
-  { href: "/contact", label: "Contact" },
-  { href: "/join", label: "Join" }
+  { href: baseUrl, label: "Home" },
+  { href: `${baseUrl}projects`, label: "Projects" },
+  { href: `${baseUrl}sponsors`, label: "Sponsors" },
+  { href: `${baseUrl}contact`, label: "Contact" },
+  { href: `${baseUrl}join`, label: "Join" }
 ];
 
 const socialLinks = [

@@ -54,7 +54,7 @@ const sortedProjects = [...projects].sort((a, b) => {
         sortedProjects.map((project) => (
           <div data-project-tag={project.data.tag} data-project-title={project.data.title.toLowerCase()}>
             <ProjectCard
-              href={`/projects/${project.id}`}
+              href={`${import.meta.env.BASE_URL}projects/${project.id}`}
               title={project.data.title}
               dateLabel={project.data.date}
               image={project.data.image}

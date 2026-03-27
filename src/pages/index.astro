@@ -34,7 +34,7 @@ const homeGallery = await getPublicGalleryImages('home', 'Home gallery image');
 		<div class="hero-overlay">
 			<h1>Fly With Us.</h1>
 			<p>Building the future of autonomous aviation, one drone at a time</p>
-			<Button href="/join">Get Involved</Button>
+			<Button href={`${import.meta.env.BASE_URL}join`}>Get Involved</Button>
 		</div>
 		<a id="hero-scroll-link" href="#about" class="hero-scroll-indicator" aria-label="Scroll to About section">
 			<ChevronDown className="hero-scroll-icon" aria-hidden="true" />
@@ -69,7 +69,8 @@ const homeGallery = await getPublicGalleryImages('home', 'Home gallery image');
 
 		const navbar = document.getElementById('site-navbar') ?? document.querySelector('header');
 		const navbarHeight = navbar instanceof HTMLElement ? navbar.getBoundingClientRect().height : 0;
-		const targetY = section.getBoundingClientRect().top + window.scrollY - navbarHeight;
+		const offset = navbarHeight + 32;
+		const targetY = section.getBoundingClientRect().top + window.scrollY - offset;
 
 		window.scrollTo({ top: targetY, behavior: 'smooth' });
 	};

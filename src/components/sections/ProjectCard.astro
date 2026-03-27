@@ -13,7 +13,7 @@ const { href, title, dateLabel, image, imageAlt, description, tag } = Astro.prop
 ---
 
 <a class="project-card" href={href}>
-  <img src={image} alt={imageAlt} loading="lazy" />
+  <img src={`${import.meta.env.BASE_URL}${image.startsWith('/') ? image.slice(1) : image}`} alt={imageAlt} loading="lazy" />
   <div class="content">
     <p class="meta">{tag} · {dateLabel}</p>
     <h3>{title}</h3>

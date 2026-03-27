@@ -18,6 +18,7 @@ export const getPublicGalleryImages = async (
   folderName: string,
   altPrefix: string,
 ): Promise<GalleryImage[]> => {
+  const baseUrl = import.meta.env.BASE_URL;
   const absoluteGalleryPath = join(process.cwd(), 'public', 'images', 'gallery', folderName);
 
   let fileNames: string[] = [];
@@ -31,7 +32,7 @@ export const getPublicGalleryImages = async (
     .filter(hasSupportedImageExtension)
     .sort((a, b) => a.localeCompare(b))
     .map((fileName, index) => ({
-      src: `/images/gallery/${folderName}/${fileName}`,
+      src: `${baseUrl}images/gallery/${folderName}/${fileName}`,
       alt: `${altPrefix} ${index + 1}`,
     }));
 };

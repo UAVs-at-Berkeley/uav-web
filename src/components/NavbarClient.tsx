@@ -9,28 +9,36 @@ import { useEffect, useState } from "react"
 
 interface NavbarClientProps {
   currentPath: string
+  baseUrl: string
 }
 
-const mainLinks = [
-  { href: "/", label: "Home" },
-  { href: "/projects", label: "Projects" },
-  { href: "/sponsors", label: "Sponsors" },
-  { href: "/docs", label: "Docs" },
+const createNavLinks = (baseUrl: string) => [
+  { href: `${baseUrl}`, label: "Home" },
+  { href: `${baseUrl}projects`, label: "Projects" },
+  { href: `${baseUrl}sponsors`, label: "Sponsors" },
+  { href: `${baseUrl}docs`, label: "Docs" },
 ]
 
-const joinLink = { href: "/join", label: "Join" }
-const aboutLink = { href: "/contact", label: "Contact" }
+const createJoinLink = (baseUrl: string) => ({ href: `${baseUrl}join`, label: "Join" })
+const createAboutLink = (baseUrl: string) => ({ href: `${baseUrl}contact`, label: "Contact" })
 
-function isActive(pathname: string, href: string) {
-  return href === "/"
-    ? pathname === "/"
-    : pathname === href || pathname.startsWith(`${href}/`)
+function normalizeUrl(url: string): string {
+  return url.endsWith('/') ? url.slice(0, -1) : url
 }
 
-export default function NavbarClient({ currentPath }: NavbarClientProps) {
+function isActive(pathname: string, href: string): boolean {
+  const normPath = normalizeUrl(pathname)
+  const normHref = normalizeUrl(href)
+  return normPath === normHref || normPath.startsWith(`${normHref}/`)
+}
+
+export default function NavbarClient({ currentPath, baseUrl }: NavbarClientProps) {
+  const mainLinks = createNavLinks(baseUrl)
+  const joinLink = createJoinLink(baseUrl)
+  const aboutLink = createAboutLink(baseUrl)
   const aboutActive = isActive(currentPath, aboutLink.href)
   const joinActive = isActive(currentPath, joinLink.href)
-  const isHomePage = currentPath === "/"
+  const isHomePage = normalizeUrl(currentPath) === normalizeUrl(baseUrl)
   const [isScrolled, setIsScrolled] = useState(!isHomePage)
 
   useEffect(() => {
@@ -75,7 +83,7 @@ export default function NavbarClient({ currentPath }: NavbarClientProps) {
     >
       <div className="mx-auto flex w-full max-w-6xl flex-wrap items-center justify-between gap-3 px-4 py-3">
         <a
-          href="/"
+          href={baseUrl}
           className={cn(
             "text-sm font-semibold tracking-tight transition-colors",
             overlayMode ? "text-white" : "text-foreground"
