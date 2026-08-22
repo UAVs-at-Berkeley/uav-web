@@ -2,6 +2,14 @@
 
 Source code for Astro-based replacement of WordPress site.
 
+## Deployment
+
+The site is hosted by the OCF. Pushing a commit to the GitHub repository will trigger the `build-and-deploy` action that builds the site and `rsync`'s the files to the `~/public_html/` directory of the OCF group account.
+
+## Development
+
+Requies Node.js version 22 or newer. Run `npm install` to install dependencies and `npm run dev` to start the development server. A Nix flake is included if you are a nerd and use NixOS.
+
 ## Site Structure
 
 ```text
