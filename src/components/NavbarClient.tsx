@@ -16,7 +16,7 @@ const createNavLinks = (baseUrl: string) => [
   { href: `${baseUrl}`, label: "Home" },
   { href: `${baseUrl}projects`, label: "Projects" },
   { href: `${baseUrl}sponsors`, label: "Sponsors" },
-  { href: `${baseUrl}docs`, label: "Docs" },
+  //{ href: `${baseUrl}docs`, label: "Docs" },
 ]
 
 const createJoinLink = (baseUrl: string) => ({ href: `${baseUrl}join`, label: "Join" })
