@@ -91,10 +91,11 @@ const {
   }
 
   .event-card {
-    border: 1px solid #e5e7eb;
-    border-radius: 0.75rem;
+    border: 1px solid color-mix(in oklab, var(--border) 90%, white);
+    border-radius: 1rem;
     padding: 1rem;
-    background: #ffffff;
+    background: var(--page-surface);
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.04);
   }
 
   .event-card h3 {
@@ -103,11 +104,11 @@ const {
 
   .event-card p {
     margin: 0.25rem 0;
-    color: #374151;
+    color: var(--muted-foreground);
   }
 
   .events-status {
     margin: 0;
-    color: #4b5563;
+    color: var(--muted-foreground);
   }
 </style>

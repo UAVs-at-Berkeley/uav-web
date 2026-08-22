@@ -27,8 +27,10 @@ const { logos } = Astro.props;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(150px, 220px));
     justify-content: center;
+    justify-items: center;
     align-items: center;
     gap: 1rem 1.25rem;
+    align-content: start;
   }
 
   .logo-gallery a {
@@ -39,7 +41,13 @@ const { logos } = Astro.props;
     justify-content: center;
     padding: 0.7rem;
     text-decoration: none;
+    border: 1px solid color-mix(in oklab, var(--border) 90%, white);
+    border-radius: 1rem;
+    background: var(--page-surface);
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.04);
     transition: opacity 180ms ease;
+    max-width: 220px;
+    justify-self: center;
   }
 
   .logo-gallery a:hover {

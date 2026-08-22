@@ -34,6 +34,8 @@ const isHomePage = normalizePath(Astro.url.pathname) === normalizePath(import.me
 <style is:global>
 	:root {
 		color-scheme: light;
+		--page-surface: color-mix(in oklab, var(--background) 92%, white);
+		--page-surface-strong: color-mix(in oklab, var(--background) 84%, white);
 	}
 
 	*,
@@ -49,10 +51,20 @@ const isHomePage = normalizePath(Astro.url.pathname) === normalizePath(import.me
 		min-height: 100%;
 	}
 
+	body {
+		background:
+			radial-gradient(circle at top left, color-mix(in oklab, var(--background) 70%, #dbeafe) 0, transparent 32%),
+			radial-gradient(circle at top right, color-mix(in oklab, var(--background) 72%, #e0e7ff) 0, transparent 28%),
+			var(--background);
+		color: var(--foreground);
+		text-rendering: optimizeLegibility;
+		-webkit-font-smoothing: antialiased;
+	}
+
 	main {
-		max-width: 1120px;
+		max-width: 1160px;
 		margin: 0 auto;
-		padding: 1.25rem 1rem;
+		padding: clamp(1rem, 2vw, 1.5rem);
 	}
 
 	main.home-main {
@@ -65,7 +77,14 @@ const isHomePage = normalizePath(Astro.url.pathname) === normalizePath(import.me
 		line-height: 1.2;
 	}
 
+	h1,
+	h2,
+	h3,
+	p {
+		text-wrap: balance;
+	}
+
 	section h2 {
-		margin: 0 0 0.7rem;
+		margin: 0 0 0.8rem;
 	}
 </style>

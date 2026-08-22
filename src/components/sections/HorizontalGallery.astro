@@ -37,7 +37,7 @@ const loopedImages = [...images, ...images];
   .uav-marquee-viewport {
     overflow: hidden;
     width: 100%;
-    border-radius: 0.75rem;
+    border-radius: 1rem;
   }
 
   .uav-marquee-track {
@@ -61,8 +61,9 @@ const loopedImages = [...images, ...images];
     width: auto;
     max-width: none;
     object-fit: contain;
-    border-radius: 0.75rem;
-    border: 1px solid #e5e7eb;
+    border-radius: 1rem;
+    border: 1px solid color-mix(in oklab, var(--border) 90%, white);
+    background: var(--page-surface);
   }
 
   @keyframes uav-gallery-marquee {

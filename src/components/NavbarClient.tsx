@@ -89,7 +89,7 @@ export default function NavbarClient({ currentPath, baseUrl }: NavbarClientProps
           : "border-border/80 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80"
       )}
     >
-      <div className="mx-auto flex w-full max-w-6xl flex-wrap items-center justify-between gap-3 px-4 py-3">
+      <div className="mx-auto flex w-full max-w-[1160px] flex-wrap items-center justify-between gap-3 px-4 py-3 sm:px-6">
         <a
           href={baseUrl}
           className={cn(

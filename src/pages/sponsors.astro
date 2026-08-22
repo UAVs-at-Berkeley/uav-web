@@ -40,13 +40,15 @@ if (!logosEntry || !donorsEntry) {
   .hero {
     display: grid;
     grid-template-columns: 1fr 320px;
-    gap: 1rem;
+    gap: 1.5rem;
     align-items: start;
   }
 
   .hero p {
     margin: 0;
-    color: #4b5563;
+    color: var(--muted-foreground);
+    line-height: 1.7;
+    max-width: 62ch;
   }
 
   .hero h2 {
@@ -59,7 +61,7 @@ if (!logosEntry || !donorsEntry) {
   }
 
   section {
-    margin-bottom: 2rem;
+    margin-bottom: clamp(2rem, 4vw, 3.25rem);
   }
 
   @media (max-width: 900px) {

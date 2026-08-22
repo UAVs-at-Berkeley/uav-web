@@ -40,10 +40,11 @@ const { tiers } = Astro.props;
   }
 
   article {
-    border: 1px solid #e5e7eb;
-    border-radius: 0.75rem;
-    padding: 1rem;
-    background: #ffffff;
+    border: 1px solid color-mix(in oklab, var(--border) 90%, white);
+    border-radius: 1rem;
+    padding: 1rem 1.1rem;
+    background: var(--page-surface);
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.04);
   }
 
   h3 {

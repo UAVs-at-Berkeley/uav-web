@@ -108,30 +108,33 @@ const sortedProjects = [...projects].sort((a, b) => {
   .page-intro {
     display: grid;
     gap: 0.75rem;
-    margin-bottom: 1.25rem;
+    margin-bottom: 1.5rem;
   }
 
   .page-intro p {
     margin: 0;
-    color: #4b5563;
+    color: var(--muted-foreground);
+    line-height: 1.7;
+    max-width: 64ch;
   }
 
   .projects-layout {
     display: grid;
     grid-template-columns: 270px 1fr;
-    gap: 1rem;
+    gap: 1.25rem;
     align-items: start;
   }
 
   aside {
-    border: 1px solid #e5e7eb;
-    border-radius: 0.75rem;
+    border: 1px solid color-mix(in oklab, var(--border) 90%, white);
+    border-radius: 1rem;
     padding: 1rem;
-    background: #ffffff;
+    background: var(--page-surface);
     display: grid;
     gap: 0.85rem;
     position: sticky;
     top: 5rem;
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.04);
   }
 
   aside h2 {
@@ -146,16 +149,22 @@ const sortedProjects = [...projects].sort((a, b) => {
   }
 
   .tag-list button {
-    border: 1px solid #d1d5db;
-    background: #ffffff;
+    border: 1px solid color-mix(in oklab, var(--border) 85%, white);
+    background: var(--background);
     border-radius: 999px;
     padding: 0.4rem 0.7rem;
     cursor: pointer;
+    transition: background-color 160ms ease, border-color 160ms ease, transform 160ms ease;
   }
 
   .tag-list button.active {
-    background: #f3f4f6;
-    border-color: #9ca3af;
+    background: color-mix(in oklab, var(--background) 88%, white);
+    border-color: color-mix(in oklab, var(--border) 65%, var(--foreground));
+  }
+
+  .tag-list button:hover,
+  .tag-list button:focus-visible {
+    transform: translateY(-1px);
   }
 
   .cards {

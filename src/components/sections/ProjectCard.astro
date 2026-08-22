@@ -23,14 +23,22 @@ const { href, title, dateLabel, image, imageAlt, description, tag } = Astro.prop
 
 <style>
   .project-card {
-    border: 1px solid #e5e7eb;
-    border-radius: 0.75rem;
+    border: 1px solid color-mix(in oklab, var(--border) 90%, white);
+    border-radius: 1rem;
     display: grid;
     grid-template-columns: 160px 1fr;
     text-decoration: none;
     color: inherit;
     overflow: hidden;
-    background: #ffffff;
+    background: var(--page-surface);
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.04);
+    transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
+  }
+
+  .project-card:hover,
+  .project-card:focus-visible {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 32px rgba(15, 23, 42, 0.08);
   }
 
   .project-card img {
@@ -38,7 +46,7 @@ const { href, title, dateLabel, image, imageAlt, description, tag } = Astro.prop
     height: 100%;
     object-fit: cover;
     min-height: 130px;
-    border-right: 1px solid #e5e7eb;
+    border-right: 1px solid color-mix(in oklab, var(--border) 90%, white);
   }
 
   .content {
@@ -68,7 +76,7 @@ const { href, title, dateLabel, image, imageAlt, description, tag } = Astro.prop
 
     .project-card img {
       border-right: 0;
-      border-bottom: 1px solid #e5e7eb;
+      border-bottom: 1px solid color-mix(in oklab, var(--border) 90%, white);
       max-height: 200px;
     }
   }

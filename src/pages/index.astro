@@ -31,10 +31,12 @@ const homeGallery = await getPublicGalleryImages('home', 'Home gallery image');
 
 <Layout title="Home">
 	<section class="hero section-space hero-full-bleed">
-		<div class="hero-overlay">
-			<h1>Fly With Us.</h1>
-			<p>Building the future of autonomous aviation, one drone at a time</p>
-			<Button href={`${import.meta.env.BASE_URL}join`}>Get Involved</Button>
+		<div class="hero-inner">
+			<div class="hero-overlay">
+				<h1>Fly With Us.</h1>
+				<p>Building the future of autonomous aviation, one drone at a time</p>
+				<Button href={`${import.meta.env.BASE_URL}join`}>Get Involved</Button>
+			</div>
 		</div>
 		<a id="hero-scroll-link" href="#about" class="hero-scroll-indicator" aria-label="Scroll to About section">
 			<ChevronDown className="hero-scroll-icon" aria-hidden="true" />
@@ -89,7 +91,7 @@ const homeGallery = await getPublicGalleryImages('home', 'Home gallery image');
 
 <style>
 	.section-space {
-		margin-bottom: 2rem;
+		margin-bottom: clamp(2rem, 4vw, 3.25rem);
 	}
 
 	.hero {
@@ -99,11 +101,13 @@ const homeGallery = await getPublicGalleryImages('home', 'Home gallery image');
 		min-height: 100svh;
 		display: flex;
 		align-items: center;
-		justify-content: flex-start;
+		justify-content: center;
+		--hero-focus-x: 50%;
 		background-image:
 			url('/images/banner4.png');
 		background-size: cover;
-		background-position: center;
+		background-position: var(--hero-focus-x) center;
+		background-color: #0f172a;
 	}
 
 	.hero-full-bleed {
@@ -139,19 +143,31 @@ const homeGallery = await getPublicGalleryImages('home', 'Home gallery image');
 		height: 1.2rem;
 	}
 
+	.hero-inner {
+		width: 100%;
+		max-width: 1160px;
+		margin: 0 auto;
+		padding: 0 clamp(1rem, 2vw, 1.5rem);
+		display: flex;
+		align-items: center;
+		min-height: inherit;
+	}
+
 	.hero-overlay {
+		position: relative;
 		display: grid;
-		gap: 0.75rem;
-		padding: 2rem;
-		max-width: min(44rem, 52%);
+		gap: 1rem;
+		padding: 0;
+		max-width: min(46rem, 100%);
 		justify-items: start;
 		text-align: left;
+		z-index: 1;
 	}
 
 	.hero h1,
 	.hero p {
 		color: #ffffff;
-		text-shadow: 0 1px 2px rgba(15, 23, 42, 0.35);
+		text-shadow: 0 1px 2px rgba(15, 23, 42, 0.42);
 	}
 
 	.hero h1,
@@ -162,13 +178,13 @@ const homeGallery = await getPublicGalleryImages('home', 'Home gallery image');
 
 	.about p,
 	.involved p {
-		color: #4b5563;
+		color: var(--muted-foreground);
 	}
 
 	.about {
 		display: grid;
 		grid-template-columns: 1fr 1fr;
-		gap: 1rem;
+		gap: 1.5rem;
 		align-items: start;
 	}
 
@@ -185,10 +201,16 @@ const homeGallery = await getPublicGalleryImages('home', 'Home gallery image');
 		.hero {
 			align-items: flex-end;
 			justify-content: flex-start;
+			min-height: 86svh;
+			--hero-focus-x: 68%;
+		}
+
+		.hero-inner {
+			align-items: flex-end;
+			padding-bottom: 1.25rem;
 		}
 
 		.hero-overlay {
-			padding: 1.125rem;
 			max-width: 100%;
 			width: 100%;
 			justify-items: start;
@@ -197,6 +219,18 @@ const homeGallery = await getPublicGalleryImages('home', 'Home gallery image');
 
 		.about {
 			grid-template-columns: 1fr;
+		}
+	}
+
+	@media (max-width: 640px), (max-aspect-ratio: 3 / 4) {
+		.hero {
+			--hero-focus-x: 82%;
+		}
+	}
+
+	@media (max-width: 420px), (max-aspect-ratio: 9 / 16) {
+		.hero {
+			--hero-focus-x: 88%;
 		}
 	}
 </style>

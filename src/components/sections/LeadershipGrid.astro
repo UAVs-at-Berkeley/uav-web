@@ -27,23 +27,30 @@ const { members } = Astro.props;
 <style>
   .leadership-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 1rem;
+    justify-items: center;
+    align-items: start;
   }
 
   article {
-    border: 1px solid #e5e7eb;
-    border-radius: 0.75rem;
+    border: 1px solid color-mix(in oklab, var(--border) 90%, white);
+    border-radius: 1rem;
     padding: 1rem;
-    background: #ffffff;
+    background: var(--page-surface);
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.04);
+    text-align: center;
+    width: 100%;
+    max-width: 320px;
+    justify-self: center;
   }
 
   img {
     width: 100%;
     aspect-ratio: 1 / 1;
     object-fit: cover;
-    border-radius: 0.5rem;
-    border: 1px solid #e5e7eb;
+    border-radius: 0.75rem;
+    border: 1px solid color-mix(in oklab, var(--border) 90%, white);
   }
 
   h3 {
@@ -52,6 +59,6 @@ const { members } = Astro.props;
 
   p {
     margin: 0;
-    color: #4b5563;
+    color: var(--muted-foreground);
   }
 </style>

@@ -36,10 +36,11 @@ const calendarSrc = `https://calendar.google.com/calendar/embed?src=${encodeURIC
 
   .calendar-embed-wrap {
     width: 100%;
-    border: 1px solid #e5e7eb;
-    border-radius: 0.75rem;
+    border: 1px solid color-mix(in oklab, var(--border) 90%, white);
+    border-radius: 1rem;
     overflow: hidden;
-    background: #ffffff;
+    background: var(--page-surface);
+    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.04);
   }
 
   .calendar-embed {
