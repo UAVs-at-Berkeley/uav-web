@@ -1,0 +1,113 @@
+---
+interface Props {
+  title?: string;
+  calendarId?: string;
+  maxResults?: number;
+}
+
+const {
+  title = 'Upcoming Events',
+  maxResults = 6,
+} = Astro.props;
+---
+
+<section
+  class="events-section"
+  data-upcoming-events
+  data-max-results={String(maxResults)}
+>
+  <h2>{title}</h2>
+  <div class="events-grid" data-events-list>
+    <p class="events-status">Loading events...</p>
+  </div>
+</section>
+
+<script>
+  // @ts-nocheck
+  const sections = document.querySelectorAll('[data-upcoming-events]');
+
+  const formatDate = (raw) => {
+    if (!raw) return 'TBD';
+    const date = new Date(raw);
+    if (Number.isNaN(date.getTime())) return 'TBD';
+    return date.toLocaleString(undefined, {
+      month: 'short',
+      day: 'numeric',
+      hour: 'numeric',
+      minute: '2-digit',
+    });
+  };
+
+  const renderCards = (list, events) => {
+    if (!events.length) {
+      list.innerHTML = '<p class="events-status">No upcoming events.</p>';
+      return;
+    }
+
+    list.innerHTML = events
+      .map(
+        (event) => `
+          <article class="event-card">
+            <h3>${event.summary ?? 'Untitled Event'}</h3>
+            <p>${formatDate(event.start?.dateTime ?? event.start?.date)}</p>
+            <p>${event.location ?? 'Location TBD'}</p>
+          </article>
+        `,
+      )
+      .join('');
+  };
+
+  sections.forEach(async (section) => {
+    const maxResults = section.dataset.maxResults ?? '6';
+    const list = section.querySelector('[data-events-list]');
+
+    if (!list) {
+      return;
+    }
+
+    try {
+      const endpoint = `/api/calendar-events.json?maxResults=${encodeURIComponent(maxResults)}`;
+      const response = await fetch(endpoint);
+      if (!response.ok) throw new Error('calendar endpoint failed');
+      const payload = await response.json();
+      const events = payload.items ?? [];
+      renderCards(list, events);
+    } catch {
+      list.innerHTML = '<p class="events-status">Unable to load events.</p>';
+    }
+  });
+</script>
+
+<style>
+  .events-section {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .events-grid {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  }
+
+  .event-card {
+    border: 1px solid #e5e7eb;
+    border-radius: 0.75rem;
+    padding: 1rem;
+    background: #ffffff;
+  }
+
+  .event-card h3 {
+    margin: 0 0 0.5rem;
+  }
+
+  .event-card p {
+    margin: 0.25rem 0;
+    color: #374151;
+  }
+
+  .events-status {
+    margin: 0;
+    color: #4b5563;
+  }
+</style>

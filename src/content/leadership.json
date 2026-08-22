@@ -1,39 +1,34 @@
 {
   "members": [
     {
-      "name": "John Lomax",
+      "name": "Gustavo Hochman",
       "title": "President",
-      "image": "/images/leadership/avery.svg"
-    },
-    {
-      "name": "Kaleb Lee",
-      "title": "Treasurer",
-      "image": "/images/leadership/avery.svg"
+      "image": "/images/leadership/gustavo.png"
     },
     {
       "name": "Eric Gu",
-      "title": "Co-Lead Airframe Engineer",
-      "image": "/images/leadership/noah.svg"
-    },
-    {
-      "name": "Gustavo Hochman",
-      "title": "Co-Lead Airframe Engineer",
-      "image": "/images/leadership/mia.svg"
+      "title": "Airframe Lead",
+      "image": "/images/leadership/eric.jpg"
     },
     {
       "name": "Ryan Yue",
-      "title": "Lead Electrical Engineer",
-      "image": "/images/leadership/liam.svg"
+      "title": "Electrical Lead",
+      "image": "/images/leadership/john.jpg"
     },
     {
-      "name": "Isaac Jones",
-      "title": "Lead Software Engineer",
-      "image": "/images/leadership/liam.svg"
+      "name": "Grant Luo",
+      "title": "Software Co-Lead",
+      "image": "/images/leadership/john.jpg"
+    },
+    {
+      "name": "Andy Liu",
+      "title": "Software Co-Lead",
+      "image": "/images/leadership/john.jpg"
     },
     {
       "name": "Troy Kim",
       "title": "Business/Media Lead",
-      "image": "/images/leadership/liam.svg"
+      "image": "/images/leadership/troy.jpg"
     }
   ]
 }
