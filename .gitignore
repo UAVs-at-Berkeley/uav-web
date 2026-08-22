@@ -22,3 +22,11 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# vscode stuff
+.vscode/*
+
+# nix / direnv
+.direnv/
+result
+result-*
