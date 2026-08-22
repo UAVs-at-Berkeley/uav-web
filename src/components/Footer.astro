@@ -20,9 +20,20 @@ const socialLinks = [
 ---
 
 <footer class="site-footer">
+  <div class="disclaimer-banner">
+    We are a student group acting independently of the University of California. We take full responsibility for our organization and this web site.
+  </div>
+
   <div class="inner">
     <div class="brand-block">
       <p class="brand-name">UAVs@Berkeley</p>
+      <a href="https://www.ocf.berkeley.edu" class="ocf-link" aria-label="Hosted by the OCF">
+        <img
+          src="http://www.ocf.berkeley.edu/hosting-logos/ocf-hosted-penguin.svg"
+          alt="Hosted by the OCF"
+          style="border: 0;"
+        />
+      </a>
       <p class="brand-tagline"></p>
     </div>
 
@@ -62,6 +73,16 @@ const socialLinks = [
     background: color-mix(in oklab, var(--background) 90%, white);
   }
 
+  .disclaimer-banner {
+    max-width: 1160px;
+    margin: 0 auto;
+    padding: 0.9rem 1rem 0;
+    text-align: center;
+    color: var(--muted-foreground);
+    font-size: 0.875rem;
+    line-height: 1.5;
+  }
+
   .inner {
     max-width: 1160px;
     margin: 0 auto;
@@ -83,6 +104,18 @@ const socialLinks = [
     margin: 0;
     font-weight: 600;
     color: var(--foreground);
+  }
+
+  .ocf-link {
+    display: inline-flex;
+    width: fit-content;
+    margin-top: 0.15rem;
+  }
+
+  .ocf-link img {
+    display: block;
+    width: 110px;
+    height: auto;
   }
 
   .brand-tagline {
