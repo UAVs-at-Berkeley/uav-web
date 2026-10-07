@@ -24,7 +24,8 @@ pnpm-debug.log*
 .idea/
 
 # vscode stuff
-.vscode/*
+.vscode/
+.agents/
 
 # nix / direnv
 .direnv/
