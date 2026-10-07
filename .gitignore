@@ -25,7 +25,10 @@ pnpm-debug.log*
 
 # vscode stuff
 .vscode/
+
+# ai etc
 .agents/
+skills-lock.json
 
 # nix / direnv
 .direnv/
