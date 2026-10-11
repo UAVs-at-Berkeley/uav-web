@@ -1,4 +1,4 @@
-name: Build and Deploy (Dev)
+name: Build and Deploy
 
 on:
   push:
@@ -25,17 +25,21 @@ jobs:
 
       - name: Deploy via rsync
         env:
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-          SSH_HOST: ${{ secrets.SSH_HOST }}
-          SSH_USER: ${{ secrets.SSH_USER }}
-          SSH_PORT: ${{ secrets.SSH_PORT }}
+          SSH_PRIVATE_KEY: ${{ secrets.WEB_SSH_PRIVATE_KEY }}
+          SSH_HOST: ${{ secrets.WEB_SSH_HOST }}
+          SSH_USER: ${{ secrets.WEB_SSH_USER }}
+          SSH_PORT: ${{ secrets.WEB_SSH_PORT }}
           DEPLOY_PATH: ${{ secrets.DEPLOY_PATH }}
         run: |
           mkdir -p ~/.ssh
           echo "$SSH_PRIVATE_KEY" > ~/.ssh/deploy_key
           chmod 600 ~/.ssh/deploy_key
           ssh-keyscan -p "$SSH_PORT" -H "$SSH_HOST" >> ~/.ssh/known_hosts 2>/dev/null || true
+          # docs/ and ground-school/ are separate sites deployed into the same
+          # directory; excluded paths are neither overwritten nor deleted.
           rsync -avz --delete \
+            --exclude='/docs/' \
+            --exclude='/ground-school/' \
             -e "ssh -i ~/.ssh/deploy_key -p $SSH_PORT -o StrictHostKeyChecking=no" \
             ./dist/ \
             "$SSH_USER@$SSH_HOST:$DEPLOY_PATH"
